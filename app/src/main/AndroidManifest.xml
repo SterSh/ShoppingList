@@ -20,10 +20,10 @@
         </activity>
         <activity
             android:name=".NewList"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".LoadList"
-            android:exported="false" />
+            android:exported="true" />
     </application>
 
 </manifest>
