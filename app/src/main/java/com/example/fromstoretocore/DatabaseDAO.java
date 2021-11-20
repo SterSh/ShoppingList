@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 public class DatabaseDAO extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "GroceryList_1";
+    public static final String DATABASE_NAME = "GroceryList";
     private Context context;
-    public static final String TABLE1 = "GROCERYLIST";
-    public static final String TABLE2 = "GROCERYLISTITEMS";
+    //public static final String TABLE1 = "GROCERYLIST";
+    //public static final String TABLE2 = "GROCERYLISTITEMS";
 
 
     public DatabaseDAO(Context context) {

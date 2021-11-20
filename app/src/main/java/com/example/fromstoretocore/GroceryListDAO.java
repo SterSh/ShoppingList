@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.ArrayList;
 
 public class GroceryListDAO {
     public static final String TABLE_NAME = "GROCERYLIST";

@@ -18,22 +18,28 @@ import java.util.List;
 public class LoadList extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, DialogInterface.OnDismissListener, View.OnClickListener {
     // Initialize Private Variables
     private ListView saved_lists;
+    private List<String> items = new ArrayList<>();
     GroceryList grocerylist;
     private ArrayAdapter listAdapter;
+    private String Filename;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load_lists);
+
         try {
             grocerylist = GroceryListDAO.select(this, getIntent().getExtras().getInt((getString(R.string.id_shopping_list))));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        Filename = grocerylist.getName();
+        items.add(Filename);
+
         //database
         saved_lists = findViewById(R.id.saved_lists);
-        listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1);
+        listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
 
         saved_lists.setAdapter(listAdapter);
     }

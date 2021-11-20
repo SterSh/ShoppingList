@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper database;
     ArrayList arrayList1, arrayList2;
     ArrayAdapter arrayAdapter1, arrayAdapter2;
+    GroceryList groceryList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
         alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                GroceryList GroceryList = new GroceryList(MainActivity.this);
-                GroceryList.setName(MainActivity.this, edName.getText().toString());
+                groceryList = new GroceryList(MainActivity.this);
+                groceryList.setName(MainActivity.this, edName.getText().toString());
+
+                //arrayList1.add(edName.getText().toString());
 
                 try {
                     startActivity(new Intent(MainActivity.this, NewList.class).putExtra(getString(R.string.id_shopping_list),
-                            GroceryListDAO.insert(MainActivity.this, GroceryList).getId()));
+                            GroceryListDAO.insert(MainActivity.this, groceryList).getId()));
                 } catch (Exception e) {
                     Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
@@ -68,36 +72,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void LoadList(View view) throws Exception {
-        GroceryList GroceryList = new GroceryList(MainActivity.this);
-        database = new DatabaseHelper(this);
-        database.insert(GroceryList.getName(), String.valueOf(this.database.getProduct()));
+        //groceryList = new GroceryList(MainActivity.this);
 
-        if (GroceryList.getName() == null) {
+        if (groceryList.getName() == null) {
             Toast toast = Toast.makeText(getApplicationContext(), "No Saved Lists Found", Toast.LENGTH_SHORT);
             toast.show();
         } else {
             Intent intent = new Intent(this, LoadList.class).putExtra(getString(R.string.id_shopping_list),
-                    String.valueOf(database));
+                    GroceryListDAO.insert(MainActivity.this, groceryList).getId());
             startActivity(intent);
-
-
-        /*
-        File dir = new File(String.valueOf(getFilesDir()));
-        File[] filelist = dir.listFiles();
-        String[] theNamesOfFiles = new String[filelist.length];
-        for (int i = 0; i < theNamesOfFiles.length; i++) {
-            theNamesOfFiles[i] = filelist[i].getName();
-        }
-        System.out.println(theNamesOfFiles);
-
-        if (theNamesOfFiles[0] == null) {
-            Toast toast = Toast.makeText(getApplicationContext(), "No Saved Lists Found", Toast.LENGTH_SHORT);
-            toast.show();
-        } else {
-            startActivity(intent);
-        }
-
-         */
         }
 
     }
