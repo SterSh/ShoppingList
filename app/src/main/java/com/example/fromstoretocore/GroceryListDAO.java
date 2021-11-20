@@ -13,7 +13,6 @@ public class GroceryListDAO {
     public static final String TABLE_NAME = "GROCERYLIST";
     public static final String FIELD_ID = "_id";
     public static final String FIELD_NAME = "NAME";
-    public static final String FIELD_DATELIST = "DATELIST";
 
 
     public static GroceryList select(Context context, int idShoppingList) throws IOException {
@@ -34,6 +33,15 @@ public class GroceryListDAO {
     }
 
 
+    public static Cursor selectAll(Context context) throws Exception {
+        try {
+            SQLiteDatabase db = new DatabaseDAO(context).getReadableDatabase();
+            return db.query(TABLE_NAME, new String[]{FIELD_ID, FIELD_NAME}, null, null, null, null, FIELD_ID + " desc");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage(), e);
+        }
+    }
+
     @SuppressLint("Range")
     public static GroceryList returnClassInstace(Context context, Cursor cursor) {
         return new GroceryList(context, cursor.getInt(cursor.getColumnIndex(FIELD_ID)), cursor.getString(cursor.getColumnIndex(FIELD_NAME)));
@@ -41,10 +49,10 @@ public class GroceryListDAO {
 
 
 
-    public static GroceryList insert(Context context, GroceryList shoppingList) throws Exception {
+    public static GroceryList insert(Context context, GroceryList groceryList) throws Exception {
         SQLiteDatabase db = new DatabaseDAO(context).getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(FIELD_NAME, shoppingList.getName());
+        cv.put(FIELD_NAME, groceryList.getName());
         try {
             db.insertOrThrow(TABLE_NAME, null, cv);
             return selectLast(context, db);

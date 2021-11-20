@@ -6,10 +6,6 @@ public class GroceryListItems {
     private int id;
     private int idShoppingList;
     private String description;
-    private float unitValue;
-    private float quantity;
-
-    private boolean checked;
 
     public String getDescription() {
         return description;
@@ -35,44 +31,13 @@ public class GroceryListItems {
         this.idShoppingList = idShoppingList;
     }
 
-    public float getUnitValue() {
-        return unitValue;
-    }
-
-    public void setUnitValue(float unitValue) {
-        this.unitValue = unitValue;
-    }
-
-    public float getQuantity() {
-        return quantity;
-    }
-
-
-    public float getTotal() {
-        return quantity * unitValue;
-    }
-
-    public void setQuantity(float quantity) {
-        this.quantity = quantity;
-    }
-
-    public boolean isChecked() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
     public GroceryListItems(Context context) {
-        this(0, 0, context.getString(R.string.no_description), 0, 0, false);
+        this(0, 0, context.getString(R.string.no_description));
     }
 
-    public GroceryListItems(int id, int idShoppingList, String description, float unitValue, float quantity, boolean checked) {
+    public GroceryListItems(int id, int idShoppingList, String description) {
         setId(id);
         setIdGroceryList(idShoppingList);
-        setUnitValue(unitValue);
-        setQuantity(quantity);
-        setChecked(checked);
+       setDescription(description);
     }
 }

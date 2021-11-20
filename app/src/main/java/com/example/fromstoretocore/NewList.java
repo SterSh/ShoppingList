@@ -57,10 +57,6 @@ public class NewList extends AppCompatActivity {
         items.add(newItem);
 
         listAdapter.notifyDataSetChanged();
-
-
-        database
-
         Toast toast = Toast.makeText(getApplicationContext(), "Item Added: " + newItem, Toast.LENGTH_SHORT);
         toast.show();
     }
