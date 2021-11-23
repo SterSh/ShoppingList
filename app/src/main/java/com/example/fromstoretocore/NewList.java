@@ -1,8 +1,10 @@
 package com.example.fromstoretocore;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
@@ -22,7 +25,6 @@ import java.util.List;
 public class NewList extends AppCompatActivity {
 
     private List<String> items = new ArrayList<>();
-    private EditText itemInput;
     private ListView lv_groceryList;
     private String Filename;
     private GroceryList grocerylist;
@@ -36,9 +38,7 @@ public class NewList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_list);
 
-        // calling the action bar
         ActionBar actionBar = getSupportActionBar();
-        // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         database = new DatabaseHelper(this);
@@ -51,8 +51,6 @@ public class NewList extends AppCompatActivity {
 
         this.setTitle(grocerylist.getName() + ": Grocery List");
 
-        itemInput = findViewById(R.id.itemInput);
-
         lv_groceryList = findViewById(R.id.lv_groceryList);
 
         listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
@@ -62,12 +60,22 @@ public class NewList extends AppCompatActivity {
     }
 
     public void AddItem(View view) {
-        String newItem = itemInput.getText().toString();
-        items.add(newItem);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("New Item");
 
-        listAdapter.notifyDataSetChanged();
-        Toast toast = Toast.makeText(getApplicationContext(), "Item Added: " + newItem, Toast.LENGTH_SHORT);
-        toast.show();
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            String newItem = input.getText().toString();
+            items.add(newItem);
+            Toast toast = Toast.makeText(getApplicationContext(), "Item Added: " + newItem, Toast.LENGTH_SHORT);
+            toast.show();
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+
+        builder.show();
     }
 
     public void SaveList(View view) throws IOException {
