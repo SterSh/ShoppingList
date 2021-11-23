@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        groceryList = new GroceryList(MainActivity.this);
+
     }
 
     public void NewList(View view) {
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                groceryList = new GroceryList(MainActivity.this);
+
                 groceryList.setName(MainActivity.this, edName.getText().toString());
 
                 //arrayList1.add(edName.getText().toString());
