@@ -21,10 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    DatabaseHelper database;
-    ArrayList arrayList1, arrayList2;
-    ArrayAdapter arrayAdapter1, arrayAdapter2;
     GroceryList groceryList;
 
     @Override
@@ -36,15 +32,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void NewList(View view) {
-        /*
-        Intent intent = new Intent(this, NewList.class);
-        //NewList temp = new NewList();
-        Toast toast = Toast.makeText(getApplicationContext(), "Creating New Grocery List", Toast.LENGTH_SHORT);
-        toast.show();
-
-        startActivity(intent);
-
-         */
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(getString(R.string.save));
         alert.setMessage(getString(R.string.title_new));
@@ -56,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
 
                 groceryList.setName(MainActivity.this, edName.getText().toString());
-
-                //arrayList1.add(edName.getText().toString());
-
                 try {
                     startActivity(new Intent(MainActivity.this, NewList.class).putExtra(getString(R.string.id_shopping_list),
                             GroceryListDAO.insert(MainActivity.this, groceryList).getId()));
@@ -74,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void LoadList(View view) throws Exception {
-        //groceryList = new GroceryList(MainActivity.this);
 
         if (groceryList.getName() == null) {
             Toast toast = Toast.makeText(getApplicationContext(), "No Saved Lists Found", Toast.LENGTH_SHORT);

@@ -1,11 +1,15 @@
 package com.example.fromstoretocore;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CursorAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -25,6 +29,7 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
     GroceryList grocerylist;
     private ArrayAdapter listAdapter;
     private String Filename;
+    private String[] Filenames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +40,12 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
         ActionBar actionBar = getSupportActionBar();
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
-
         try {
-            grocerylist = GroceryListDAO.select(this, getIntent().getExtras().getInt((getString(R.string.id_shopping_list))));
-        } catch (IOException e) {
+            grocerylist = (GroceryList) GroceryListDAO.selectAll(this);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Filename = grocerylist.getName();
-        items.add(Filename);
 
         //database
         saved_lists = findViewById(R.id.saved_lists);

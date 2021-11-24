@@ -28,8 +28,6 @@ public class NewList extends AppCompatActivity {
     private ListView lv_groceryList;
     private String Filename;
     private GroceryList grocerylist;
-    private GroceryListItems groceryListItems;
-    DatabaseHelper database;
 
     ArrayAdapter listAdapter;
 
@@ -41,7 +39,6 @@ public class NewList extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        database = new DatabaseHelper(this);
         try {
             grocerylist = GroceryListDAO.select(this, getIntent().getExtras().getInt((getString(R.string.id_shopping_list))));
         } catch (Exception e) {
@@ -70,15 +67,24 @@ public class NewList extends AppCompatActivity {
         builder.setPositiveButton("OK", (dialog, which) -> {
             String newItem = input.getText().toString();
             items.add(newItem);
+
+            try {
+                GroceryListItemsDAO.insert(this, new GroceryListItems(0, grocerylist.getId(), newItem));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Toast toast = Toast.makeText(getApplicationContext(), "Item Added: " + newItem, Toast.LENGTH_SHORT);
             toast.show();
+
+
         });
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
 
         builder.show();
     }
 
-    public void SaveList(View view) throws IOException {
+    public void SaveList(View view) throws Exception {
+        /*
         Filename = grocerylist.getName();
         if (Filename.matches("")) {
             Toast toast = Toast.makeText(getApplicationContext(),
@@ -93,8 +99,8 @@ public class NewList extends AppCompatActivity {
 
             System.out.println("inputString= " + inputString);
 
-            database.insert(Filename, inputString);
-            /*
+            //database.insert(Filename, inputString);
+
             FileOutputStream fos = null;
             fos = openFileOutput(Filename, Context.MODE_PRIVATE);
 
@@ -107,8 +113,9 @@ public class NewList extends AppCompatActivity {
                     "Successfully saved List: " + Filename, Toast.LENGTH_SHORT);
             toast.show();
 
-             */
+
         }
+         */
     }
 
     // this event will enable the back
