@@ -53,6 +53,7 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
 
         saved_lists.setAdapter(listAdapter);
     }
+
     protected void onResume() {
         saved_lists.setOnItemClickListener(this);
         saved_lists.setOnItemLongClickListener(this);

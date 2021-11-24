@@ -24,12 +24,12 @@ import java.util.List;
 
 public class NewList extends AppCompatActivity {
 
-    private List<String> items = new ArrayList<>();
+    private ArrayList<String> items = new ArrayList<>();
     private ListView lv_groceryList;
     private String Filename;
     private GroceryList grocerylist;
 
-    ArrayAdapter listAdapter;
+    static ItemListViewAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class NewList extends AppCompatActivity {
 
         lv_groceryList = findViewById(R.id.lv_groceryList);
 
-        listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
+        listAdapter = new ItemListViewAdapter(this, items);
         lv_groceryList.setAdapter(listAdapter);
 
 

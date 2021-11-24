@@ -4,6 +4,7 @@ import android.content.Context;
 import java.util.Date;
 
 public class GroceryList {
+
     private int id;
     private String name;
 
@@ -20,11 +21,11 @@ public class GroceryList {
     }
 
     public void setName(Context context, String name) {
-        this.name = (name.isEmpty() ? context.getString(R.string.untitled) : name);
+        this.name = (name.isEmpty() ? null : name);
     }
 
     public GroceryList(Context context) {
-        this(context, 0, context.getString(R.string.untitled));
+        return;
     }
 
     public GroceryList(Context context, int id, String name) {
