@@ -23,6 +23,9 @@ public class GroceryList {
     public void setName(Context context, String name) {
         this.name = (name.isEmpty() ? null : name);
     }
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public GroceryList(Context context) {
         return;
@@ -31,5 +34,9 @@ public class GroceryList {
     public GroceryList(Context context, int id, String name) {
         setId(id);
         setName(context, name);
+    }
+    public GroceryList( int id, String name) {
+        setId(id);
+        setName(name);
     }
 }

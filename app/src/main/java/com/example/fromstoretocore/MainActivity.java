@@ -59,13 +59,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void LoadList(View view) throws Exception {
 
+        Intent intent = new Intent(this, LoadList.class);
+        startActivity(intent);
         if (groceryList.getName() == null) {
             Toast toast = Toast.makeText(getApplicationContext(), "No Saved Lists Found", Toast.LENGTH_SHORT);
             toast.show();
         } else {
-            Intent intent = new Intent(this, LoadList.class).putExtra(getString(R.string.id_shopping_list),
-                    GroceryListDAO.insert(MainActivity.this, groceryList).getId());
-            startActivity(intent);
+            //Intent intent = new Intent(this, LoadList.class);
+            //startActivity(intent);
         }
 
     }

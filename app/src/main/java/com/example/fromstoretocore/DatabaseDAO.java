@@ -12,11 +12,12 @@ import java.util.ArrayList;
 
 public class DatabaseDAO extends SQLiteOpenHelper {
 
+    public static final String TABLE_NAME = "GROCERYLIST";
     public static final String DATABASE_NAME = "GroceryList";
     private Context context;
 
     public DatabaseDAO(Context context) {
-        super(context, DATABASE_NAME, null,1);
+        super(context, DATABASE_NAME, null, 1);
         this.context = context;
     }
 
@@ -50,5 +51,20 @@ public class DatabaseDAO extends SQLiteOpenHelper {
         } finally {
             db.endTransaction();
         }
+    }
+
+    public ArrayList<GroceryList> getListNames() {
+        ArrayList<GroceryList> groceryLists = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
+
+        while (res.moveToNext()) {
+            int id = res.getInt(0);
+            String name = res.getString(1);
+
+            GroceryList newList = new GroceryList(id, name);
+            groceryLists.add(newList);
+        }
+        return groceryLists;
     }
 }

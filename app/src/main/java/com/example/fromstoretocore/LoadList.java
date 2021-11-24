@@ -3,6 +3,7 @@ package com.example.fromstoretocore;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,8 +29,7 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
     private List<String> items = new ArrayList<>();
     GroceryList grocerylist;
     private ArrayAdapter listAdapter;
-    private String Filename;
-    private String[] Filenames;
+    ArrayList<GroceryList> groceryLists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +45,13 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        // Call DatabaseDAO
+        DatabaseDAO databaseDAO = new DatabaseDAO(this);
+        ArrayList<GroceryList> groceryList = databaseDAO.getListNames();
 
         //database
         saved_lists = findViewById(R.id.saved_lists);
-        listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
+        listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, groceryList);
 
         saved_lists.setAdapter(listAdapter);
     }
