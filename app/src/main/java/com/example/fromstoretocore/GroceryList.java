@@ -6,7 +6,7 @@ import java.util.Date;
 public class GroceryList {
 
     private int id;
-    private String name;
+    public static String name;
 
     public int getId() {
         return id;

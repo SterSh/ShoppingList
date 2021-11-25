@@ -1,7 +1,5 @@
 package com.example.fromstoretocore;
 
-import android.annotation.SuppressLint;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -53,8 +51,8 @@ public class DatabaseDAO extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<GroceryList> getListNames() {
-        ArrayList<GroceryList> groceryLists = new ArrayList<>();
+    public ArrayList<String> getListNames() {
+        ArrayList<String> groceryLists = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
 
@@ -63,7 +61,8 @@ public class DatabaseDAO extends SQLiteOpenHelper {
             String name = res.getString(1);
 
             GroceryList newList = new GroceryList(id, name);
-            groceryLists.add(newList);
+            String objName = GroceryList.name;
+            groceryLists.add(objName);
         }
         return groceryLists;
     }

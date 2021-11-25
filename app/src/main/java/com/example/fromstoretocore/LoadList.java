@@ -47,7 +47,7 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
         }
         // Call DatabaseDAO
         DatabaseDAO databaseDAO = new DatabaseDAO(this);
-        ArrayList<GroceryList> groceryList = databaseDAO.getListNames();
+        ArrayList<String> groceryList = databaseDAO.getListNames();
 
         //database
         saved_lists = findViewById(R.id.saved_lists);
@@ -64,10 +64,6 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
         super.onResume();
 
         saved_lists.setAdapter(listAdapter);
-
-		/*//Initializing the pollfish monetarization
-        PollFish.init(this, getString(R.string.pollfish_api_key), Position.BOTTOM_LEFT, 30);
-        adView.resume();*/
         
     }
 
