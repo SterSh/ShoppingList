@@ -16,9 +16,7 @@ public class GroceryList {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public void setName(Context context, String name) {
         this.name = (name.isEmpty() ? null : name);

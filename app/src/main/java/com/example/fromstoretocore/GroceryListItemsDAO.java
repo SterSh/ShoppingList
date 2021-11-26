@@ -16,11 +16,16 @@ public class GroceryListItemsDAO {
     public static final String FIELD_ID = "_id";
     public static final String FIELD_IDGROCERYLIST = "IDGROCERYLIST";
     public static final String FIELD_PRODUCT = "DESCRIPTION";
+    public static final String FIELD_QUANTITY = "QUANTITY";
+    public static final String FIELD_ITEMPRICE = "ITEMPRICE";
+    public static final String FIELD_TOTALPRICE = "TOTALPRICE";
+    public static final String FIELD_CHECKED = "CHECKED";
 
     public static GroceryListItems insert(Context context, SQLiteDatabase db, GroceryListItems groceryListItems) throws Exception {
         ContentValues cv = new ContentValues();
         cv.put(FIELD_IDGROCERYLIST, groceryListItems.getIdGroceryList());
         cv.put(FIELD_PRODUCT, groceryListItems.getDescription());
+        // Add cv.put for the rest of the fields using getters for each variable
         try {
             db.insert(TABLE_NAME, null, cv);
             return selectLast(context, db);
@@ -34,6 +39,7 @@ public class GroceryListItemsDAO {
         ContentValues cv = new ContentValues();
         cv.put(FIELD_IDGROCERYLIST, groceryListItems.getIdGroceryList());
         cv.put(FIELD_PRODUCT, groceryListItems.getDescription());
+        // Add cv.put for the rest of the fields using getters for each variable
         try {
             db.insert(TABLE_NAME, null, cv);
             return selectLast(context, db);
@@ -44,6 +50,7 @@ public class GroceryListItemsDAO {
 
     private static GroceryListItems selectLast(Context context, SQLiteDatabase db) throws Exception {
         try {
+            // Add the rest of the fields inside the { }
             Cursor cursor = db.query(TABLE_NAME, new String[] { FIELD_ID, FIELD_IDGROCERYLIST, FIELD_PRODUCT }, null, null, null,null, FIELD_ID + " desc");
             if (cursor.moveToNext()) {
                 return returnClassInstace(context, cursor);

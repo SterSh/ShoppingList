@@ -6,6 +6,27 @@ public class GroceryListItems {
     private int id;
     private int idShoppingList;
     private String description;
+    private float quantity;
+    private float totalPrice;
+    private float itemPrice;
+
+    private boolean checked;
+
+    public float getQuantity() { return quantity; }
+
+    public void setQuantity(float quantity) { this.quantity = quantity; }
+
+    public float getTotalPrice() { return totalPrice; }
+
+    public void setTotalPrice(float totalPrice) { this.totalPrice = totalPrice; }
+
+    public float getItemPrice() { return itemPrice; }
+
+    public void setItemPrice(float itemPrice) { this.itemPrice = itemPrice; }
+
+    public boolean isChecked() { return checked; }
+
+    public void setChecked(boolean checked) { this.checked = checked; }
 
     public String getDescription() {
         return description;
@@ -38,6 +59,8 @@ public class GroceryListItems {
     public GroceryListItems(int id, int idShoppingList, String description) {
         setId(id);
         setIdGroceryList(idShoppingList);
-       setDescription(description);
+        setDescription(description);
+        // Add Set for totalPrice, itemPrice, Checked, and quantity //
+
     }
 }
