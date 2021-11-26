@@ -21,6 +21,7 @@ public class GroceryListItemsDAO {
     public static final String FIELD_TOTALPRICE = "TOTALPRICE";
     public static final String FIELD_CHECKED = "CHECKED";
 
+    // This will be the insert function to insert into a previous list //
     public static GroceryListItems insert(Context context, SQLiteDatabase db, GroceryListItems groceryListItems) throws Exception {
         ContentValues cv = new ContentValues();
         cv.put(FIELD_IDGROCERYLIST, groceryListItems.getIdGroceryList());
