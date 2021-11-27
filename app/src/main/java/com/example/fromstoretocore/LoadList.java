@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -30,6 +32,7 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
     GroceryList grocerylist;
     private ArrayAdapter listAdapter;
     ArrayList<GroceryList> groceryLists;
+    ArrayList<String> grocerylistNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +50,34 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
         }
         // Call DatabaseDAO
         DatabaseDAO databaseDAO = new DatabaseDAO(this);
-        ArrayList<String> groceryList = databaseDAO.getListNames();
+        ArrayList<GroceryList> groceryList = databaseDAO.getListNames();
 
         //database
         saved_lists = findViewById(R.id.saved_lists);
         listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, groceryList);
 
         saved_lists.setAdapter(listAdapter);
+
+        saved_lists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                GroceryList clickedList = (GroceryList) parent.getItemAtPosition(position);
+                Toast toast = Toast.makeText(getApplicationContext(), "List Name: " + clickedList.getName() +
+                        " List ID: " + clickedList.getId(), Toast.LENGTH_LONG);
+                toast.show();
+            }
+        });
     }
 
     protected void onResume() {
-        saved_lists.setOnItemClickListener(this);
-        saved_lists.setOnItemLongClickListener(this);
+        //saved_lists.setOnItemClickListener(this);
+        //saved_lists.setOnItemLongClickListener(this);
 
         refreshListView();
         super.onResume();
 
         saved_lists.setAdapter(listAdapter);
-        
+
     }
 
     private void refreshListView() {
@@ -73,11 +86,6 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
 
     @Override
     public void onDismiss(DialogInterface dialog) {
-
-    }
-
-    @Override
-    public void onClick(View v) {
 
     }
 
@@ -101,5 +109,10 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
