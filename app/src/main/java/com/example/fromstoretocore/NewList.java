@@ -26,7 +26,6 @@ public class NewList extends AppCompatActivity {
 
     private ArrayList<String> items = new ArrayList<>();
     private ListView lv_groceryList;
-    private String Filename;
     private GroceryList grocerylist;
 
     static ItemListViewAdapter listAdapter;
@@ -40,13 +39,17 @@ public class NewList extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         try {
-            grocerylist = GroceryListDAO.select(this, getIntent().getExtras().getInt((getString(R.string.id_shopping_list))));
+            grocerylist = GroceryListDAO.select(this, getIntent().getExtras().getInt("groceryList"));
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
 
+
         this.setTitle(grocerylist.getName() + ": Grocery List");
+
+
+
 
         lv_groceryList = findViewById(R.id.lv_groceryList);
 

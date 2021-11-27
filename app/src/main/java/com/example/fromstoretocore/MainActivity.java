@@ -44,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
                 groceryList.setName(MainActivity.this, edName.getText().toString());
                 try {
-                    startActivity(new Intent(MainActivity.this, NewList.class).putExtra(getString(R.string.id_shopping_list),
-                            GroceryListDAO.insert(MainActivity.this, groceryList).getId()));
+                    startActivity(new Intent(MainActivity.this, NewList.class).putExtra("groceryList", GroceryListDAO.insert(MainActivity.this, groceryList).getId()));
                 } catch (Exception e) {
                     Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     e.printStackTrace();

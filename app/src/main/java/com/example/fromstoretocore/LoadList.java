@@ -2,9 +2,11 @@ package com.example.fromstoretocore;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,14 +27,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoadList extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, DialogInterface.OnDismissListener, View.OnClickListener {
+public class LoadList extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, DialogInterface.OnDismissListener {
     // Initialize Private Variables
     private ListView saved_lists;
     private List<String> items = new ArrayList<>();
     GroceryList grocerylist;
     private ArrayAdapter listAdapter;
-    ArrayList<GroceryList> groceryLists;
-    ArrayList<String> grocerylistNames;
+    ArrayList<GroceryList> groceryList;
+    ArrayList<GroceryListItems> groceryItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
         }
         // Call DatabaseDAO
         DatabaseDAO databaseDAO = new DatabaseDAO(this);
-        ArrayList<GroceryList> groceryList = databaseDAO.getListNames();
+        groceryList = databaseDAO.getListNames();
 
         //database
         saved_lists = findViewById(R.id.saved_lists);
@@ -62,9 +64,12 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GroceryList clickedList = (GroceryList) parent.getItemAtPosition(position);
-                Toast toast = Toast.makeText(getApplicationContext(), "List Name: " + clickedList.getName() +
-                        " List ID: " + clickedList.getId(), Toast.LENGTH_LONG);
-                toast.show();
+
+                Log.d("intent", "" + clickedList.getName());
+
+                Intent intent = new Intent(LoadList.this, NewList.class);
+                intent.putExtra("groceryList", clickedList.getId());
+                startActivity(intent);
             }
         });
     }
@@ -111,8 +116,4 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

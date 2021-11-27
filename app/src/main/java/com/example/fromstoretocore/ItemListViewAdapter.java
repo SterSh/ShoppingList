@@ -19,7 +19,7 @@ public class ItemListViewAdapter extends ArrayAdapter<String> {
     ArrayList<String> list;
     Context context;
 
-    public ItemListViewAdapter(Context context, ArrayList<String>items) {
+    public ItemListViewAdapter(Context context, ArrayList<String> items) {
         super(context, R.layout.item_list_row, items);
         this.context = context;
         list = items;

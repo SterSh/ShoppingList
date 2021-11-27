@@ -2,7 +2,9 @@ package com.example.fromstoretocore;
 
 import android.content.Context;
 
-public class GroceryListItems {
+import java.io.Serializable;
+
+public class GroceryListItems implements Serializable {
     private int id;
     private int idShoppingList;
     private String description;

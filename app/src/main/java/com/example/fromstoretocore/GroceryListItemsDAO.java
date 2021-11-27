@@ -20,6 +20,13 @@ public class GroceryListItemsDAO {
     public static final String FIELD_ITEMPRICE = "ITEMPRICE";
     public static final String FIELD_TOTALPRICE = "TOTALPRICE";
     public static final String FIELD_CHECKED = "CHECKED";
+    public static final String DATABASE_NAME = "GroceryList";
+    private static Context context;
+
+
+    public GroceryListItemsDAO(Context context) {
+        this.context = context;
+    }
 
     // This will be the insert function to insert into a previous list //
     public static GroceryListItems insert(Context context, SQLiteDatabase db, GroceryListItems groceryListItems) throws Exception {
@@ -62,6 +69,23 @@ public class GroceryListItemsDAO {
         }
 
         return null;
+    }
+
+    public static ArrayList<GroceryListItems> getListItems(int listID) {
+        ArrayList<GroceryListItems> groceryListItems = new ArrayList<>();
+        SQLiteDatabase db = new DatabaseDAO(context).getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME + " WHERE " + FIELD_IDGROCERYLIST + " = " + listID, null);
+
+        while (res.moveToNext()) {
+            int id = res.getInt(0);
+            int idShoppingList = res.getInt(1);
+            String name = res.getString(2);
+
+            GroceryListItems listItems = new GroceryListItems(id, idShoppingList, name);
+
+            groceryListItems.add(listItems);
+        }
+        return groceryListItems;
     }
 
     @SuppressLint("Range")

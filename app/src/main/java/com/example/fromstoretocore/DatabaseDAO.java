@@ -75,21 +75,6 @@ public class DatabaseDAO extends SQLiteOpenHelper {
         return groceryLists;
     }
     //Method to get all the items for a given list.
-    public ArrayList<GroceryListItems> getListItems(int listID) {
-        ArrayList<GroceryListItems> groceryListItems = new ArrayList<>();
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from " + ITEM_TABLE_NAME, null);
 
-        while (res.moveToNext()) {
-            int id = res.getInt(0);
-            int idShoppingList = res.getInt(1);
-            String name = res.getString(2);
-
-            GroceryListItems listItems = new GroceryListItems(id, idShoppingList, name);
-
-            groceryListItems.add(listItems);
-        }
-        return groceryListItems;
-    }
 
 }
