@@ -12,36 +12,40 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
-public class ItemListViewAdapter extends ArrayAdapter<String> {
+public class ItemListViewAdapter extends ArrayAdapter<GroceryListItems> {
 
-    ArrayList<String> list;
+    public static ArrayList<GroceryListItems> items;
     Context context;
 
-    public ItemListViewAdapter(Context context, ArrayList<String>items) {
+    public ItemListViewAdapter(Context context, ArrayList<GroceryListItems> items) {
         super(context, R.layout.item_list_row, items);
-        this.context = context;
-        list = items;
+
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView == null){
-            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService((Activity.LAYOUT_INFLATER_SERVICE));
-            convertView = layoutInflater.inflate(R.layout.item_list_row, null);
 
-            TextView number = convertView.findViewById(R.id.item_number);
+        GroceryListItems items = getItem(position);
+
+        if(convertView == null){
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_list_row, parent, false);
+        }
+
+            TextView number = (TextView) convertView.findViewById(R.id.item_number);
             number.setText(position + 1 + ".");
 
-            TextView item = convertView.findViewById(R.id.item_name);
-            item.setText(list.get(position));
+            TextView itemName = (TextView) convertView.findViewById(R.id.item_name);
+            itemName.setText(items.getDescription());
 
             ImageView note = convertView.findViewById(R.id.item_note);
             ImageView delete = convertView.findViewById(R.id.item_note);
 
-        }
+
         return convertView;
     }
 }

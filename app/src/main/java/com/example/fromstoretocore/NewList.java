@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -25,8 +26,8 @@ import java.util.List;
 public class NewList extends AppCompatActivity {
 
     private ArrayList<String> items = new ArrayList<>();
+    private ArrayList<GroceryListItems> groceryItems = new ArrayList<>();
     private ListView lv_groceryList;
-    private String Filename;
     private GroceryList grocerylist;
 
     static ItemListViewAdapter listAdapter;
@@ -40,17 +41,24 @@ public class NewList extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         try {
-            grocerylist = GroceryListDAO.select(this, getIntent().getExtras().getInt((getString(R.string.id_shopping_list))));
+            grocerylist = GroceryListDAO.select(this, getIntent().getExtras().getInt("groceryList"));
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
 
+
         this.setTitle(grocerylist.getName() + ": Grocery List");
+
+        GroceryListItemsDAO groceryListItemsDAO = new GroceryListItemsDAO(this);
+        groceryItems = GroceryListItemsDAO.getListItems(grocerylist.getId());
+
+        Log.d("Tag", "" + groceryItems);
+
 
         lv_groceryList = findViewById(R.id.lv_groceryList);
 
-        listAdapter = new ItemListViewAdapter(this, items);
+        listAdapter = new ItemListViewAdapter(this, groceryItems);
         lv_groceryList.setAdapter(listAdapter);
 
 

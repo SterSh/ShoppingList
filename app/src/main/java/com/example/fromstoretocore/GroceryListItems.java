@@ -2,7 +2,11 @@ package com.example.fromstoretocore;
 
 import android.content.Context;
 
-public class GroceryListItems {
+import androidx.annotation.NonNull;
+
+import java.io.Serializable;
+
+public class GroceryListItems implements Serializable {
     private int id;
     private int idShoppingList;
     private String description;
@@ -62,5 +66,11 @@ public class GroceryListItems {
         setDescription(description);
         // Add Set for totalPrice, itemPrice, Checked, and quantity //
 
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "" + description;
     }
 }
