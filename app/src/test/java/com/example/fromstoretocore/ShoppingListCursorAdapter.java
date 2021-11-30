@@ -2,14 +2,10 @@ package com.example.fromstoretocore;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class ShoppingListCursorAdapter extends CursorAdapter {
@@ -25,7 +21,7 @@ public class ShoppingListCursorAdapter extends CursorAdapter {
         try {
             Cursor c = getCursor();
             c.moveToPosition(position);
-            return GroceryListDAO.returnClassInstace(context, c);
+            return GroceryListDAO.returnClassInstance(context, c);
         } catch (Exception e) {
             return null;
         }

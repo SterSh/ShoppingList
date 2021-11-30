@@ -5,10 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.ArrayAdapter;
-
-import java.util.ArrayList;
 
 public class GroceryListItemsDAO {
 
@@ -61,7 +57,7 @@ public class GroceryListItemsDAO {
             // Add the rest of the fields inside the { }
             Cursor cursor = db.query(TABLE_NAME, new String[] { FIELD_ID, FIELD_IDGROCERYLIST, FIELD_PRODUCT }, null, null, null,null, FIELD_ID + " desc");
             if (cursor.moveToNext()) {
-                return returnClassInstace(context, cursor);
+                return returnClassInstance(context, cursor);
             }
             cursor.close();
         } catch (Exception e) {
@@ -89,7 +85,7 @@ public class GroceryListItemsDAO {
     }
 
     @SuppressLint("Range")
-    public static GroceryListItems returnClassInstace(Context context, Cursor cursor) {
+    public static GroceryListItems returnClassInstance(Context context, Cursor cursor) {
         return new GroceryListItems(cursor.getInt(cursor.getColumnIndex(FIELD_ID)), cursor.getInt(cursor.getColumnIndex(FIELD_IDGROCERYLIST)), cursor.getString(cursor.getColumnIndex(FIELD_PRODUCT)));
     }
 }
