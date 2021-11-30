@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class GroceryListDAO {
     public static final String TABLE_NAME = "GROCERYLIST";
@@ -20,7 +19,7 @@ public class GroceryListDAO {
         try {
             Cursor cursor = db.query(TABLE_NAME, new String[] { FIELD_ID, FIELD_NAME }, FIELD_ID + " = ?", new String[] { String.valueOf(idShoppingList) }, null, null, null);
             if (cursor.moveToFirst()) {
-                return returnClassInstace(context, cursor);
+                return returnClassInstance(context, cursor);
             }
 
             cursor.close();
@@ -43,7 +42,7 @@ public class GroceryListDAO {
     }
 
     @SuppressLint("Range")
-    public static GroceryList returnClassInstace(Context context, Cursor cursor) {
+    public static GroceryList returnClassInstance(Context context, Cursor cursor) {
         return new GroceryList(context, cursor.getInt(cursor.getColumnIndex(FIELD_ID)), cursor.getString(cursor.getColumnIndex(FIELD_NAME)));
     }
 
@@ -66,7 +65,7 @@ public class GroceryListDAO {
         try {
             Cursor cursor = db.query(TABLE_NAME, new String[] { FIELD_ID, FIELD_NAME }, null, null, null, null, FIELD_ID + " desc");
             if (cursor.moveToFirst()) {
-                return returnClassInstace(context, cursor);
+                return returnClassInstance(context, cursor);
             }
 
             cursor.close();
