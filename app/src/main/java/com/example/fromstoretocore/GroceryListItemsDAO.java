@@ -19,6 +19,7 @@ public class GroceryListItemsDAO {
     public static final String FIELD_TOTALPRICE = "TOTALPRICE";
     public static final String FIELD_CHECKED = "CHECKED";
     public static final String DATABASE_NAME = "GroceryList";
+
     private static Context context;
 
 
@@ -84,6 +85,20 @@ public class GroceryListItemsDAO {
             groceryListItems.add(listItems);
         }
         return groceryListItems;
+    }
+
+    public static boolean deleteItem(GroceryListItems groceryListItem) {
+        SQLiteDatabase db = new DatabaseDAO(context).getWritableDatabase();
+        String queryString = "DELETE FROM " + TABLE_NAME + " WHERE " + FIELD_ID + " = " + groceryListItem.getId();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     @SuppressLint("Range")

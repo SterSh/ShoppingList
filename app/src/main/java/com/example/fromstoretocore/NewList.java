@@ -1,15 +1,24 @@
 package com.example.fromstoretocore;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +28,12 @@ import java.util.ArrayList;
 public class NewList extends AppCompatActivity {
 
     private ArrayList<String> items = new ArrayList<>();
-    private ArrayList<GroceryListItems> groceryItems = new ArrayList<>();
-    private ListView lv_groceryList;
-    private GroceryList grocerylist;
+    private static ArrayList<GroceryListItems> groceryItems = new ArrayList<>();
+    private static ListView lv_groceryList;
+    private static GroceryList grocerylist;
 
-    ItemListViewAdapter listAdapter;
+    public static ItemListViewAdapter listAdapter;
+    GroceryListItemsDAO groceryListItemsDAO = new GroceryListItemsDAO(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +53,37 @@ public class NewList extends AppCompatActivity {
         //displays the name of the grocery list in the header
         this.setTitle(grocerylist.getName() + ": Grocery List");
         //Query the database for all the items associated with the list
-        GroceryListItemsDAO groceryListItemsDAO = new GroceryListItemsDAO(this);
         groceryItems = groceryListItemsDAO.getListItems(grocerylist.getId());
-
-        //Log.d("Tag", "" + groceryItems);
-
 
         lv_groceryList = findViewById(R.id.lv_groceryList);
 
         listAdapter = new ItemListViewAdapter(this, groceryItems);
         lv_groceryList.setAdapter(listAdapter);
 
+//        lv_groceryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                GroceryListItems clickedItem = (GroceryListItems) parent.getItemAtPosition(position);
+//
+//                GroceryListItemsDAO.deleteItem(clickedItem);
+//
+//                groceryItems = groceryListItemsDAO.getListItems(grocerylist.getId());
+//                listAdapter = new ItemListViewAdapter(NewList.this, groceryItems);
+//                lv_groceryList.setAdapter(listAdapter);
+//            }
+//
+//        });
 
+    }
+
+    public static void deleteItem(GroceryListItems item) {
+        GroceryListItemsDAO.deleteItem(item);
+
+    }
+
+    public void updateItems() {
+        groceryItems = groceryListItemsDAO.getListItems(grocerylist.getId());
+        lv_groceryList.setAdapter(listAdapter);
     }
 
     public void AddItem(View view) {
@@ -80,6 +109,7 @@ public class NewList extends AppCompatActivity {
                 groceryItems = groceryListItemsDAO.getListItems(grocerylist.getId());
                 listAdapter = new ItemListViewAdapter(this, groceryItems);
                 lv_groceryList.setAdapter(listAdapter);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -92,7 +122,10 @@ public class NewList extends AppCompatActivity {
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
 
         builder.show();
+
     }
+
+
 
     public void SaveList(View view) throws Exception {
         /*
