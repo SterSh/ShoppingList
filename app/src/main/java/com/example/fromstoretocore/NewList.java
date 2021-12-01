@@ -1,14 +1,10 @@
 package com.example.fromstoretocore;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -17,11 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.gson.Gson;
-import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class NewList extends AppCompatActivity {
 
@@ -30,7 +23,7 @@ public class NewList extends AppCompatActivity {
     private ListView lv_groceryList;
     private GroceryList grocerylist;
 
-    static ItemListViewAdapter listAdapter;
+    ItemListViewAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +40,13 @@ public class NewList extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
+        //displays the name of the grocery list in the header
         this.setTitle(grocerylist.getName() + ": Grocery List");
-
+        //Query the database for all the items associated with the list
         GroceryListItemsDAO groceryListItemsDAO = new GroceryListItemsDAO(this);
-        groceryItems = GroceryListItemsDAO.getListItems(grocerylist.getId());
+        groceryItems = groceryListItemsDAO.getListItems(grocerylist.getId());
 
-        Log.d("Tag", "" + groceryItems);
+        //Log.d("Tag", "" + groceryItems);
 
 
         lv_groceryList = findViewById(R.id.lv_groceryList);
@@ -81,6 +74,16 @@ public class NewList extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            try {
+                GroceryListItemsDAO groceryListItemsDAO = new GroceryListItemsDAO(this);
+                groceryItems = groceryListItemsDAO.getListItems(grocerylist.getId());
+                listAdapter = new ItemListViewAdapter(this, groceryItems);
+                lv_groceryList.setAdapter(listAdapter);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             Toast toast = Toast.makeText(getApplicationContext(), "Item Added: " + newItem, Toast.LENGTH_SHORT);
             toast.show();
 
