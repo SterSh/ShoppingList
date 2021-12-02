@@ -1,13 +1,12 @@
 package com.example.fromstoretocore;
 
 
+
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +17,8 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class ItemListViewAdapter extends ArrayAdapter<GroceryListItems> {
-    
+
+
     public ItemListViewAdapter(Context context, ArrayList<GroceryListItems> items) {
         super(context, R.layout.item_list_row, items);
 
@@ -49,6 +49,8 @@ public class ItemListViewAdapter extends ArrayAdapter<GroceryListItems> {
                         NewList.deleteItem(items);
                         remove(items);
                         notifyDataSetChanged();
+                        Toast toast = Toast.makeText(getContext(), "Item Deleted: " + items.getDescription(), Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 }
             );
