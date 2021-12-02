@@ -56,7 +56,7 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
 
         //database
         saved_lists = findViewById(R.id.saved_lists);
-        listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, groceryList);
+        listAdapter = new ListsListViewAdapter(this, groceryList);
 
         saved_lists.setAdapter(listAdapter);
 
@@ -64,8 +64,6 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GroceryList clickedList = (GroceryList) parent.getItemAtPosition(position);
-
-                Log.d("intent", "" + clickedList.getName());
 
                 Intent intent = new Intent(LoadList.this, NewList.class);
                 intent.putExtra("groceryList", clickedList.getId());
@@ -75,9 +73,6 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
     }
 
     protected void onResume() {
-        //saved_lists.setOnItemClickListener(this);
-        //saved_lists.setOnItemLongClickListener(this);
-
         refreshListView();
         super.onResume();
 

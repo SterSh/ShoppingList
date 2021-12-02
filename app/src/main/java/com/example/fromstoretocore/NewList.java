@@ -60,20 +60,6 @@ public class NewList extends AppCompatActivity {
         listAdapter = new ItemListViewAdapter(this, groceryItems);
         lv_groceryList.setAdapter(listAdapter);
 
-//        lv_groceryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                GroceryListItems clickedItem = (GroceryListItems) parent.getItemAtPosition(position);
-//
-//                GroceryListItemsDAO.deleteItem(clickedItem);
-//
-//                groceryItems = groceryListItemsDAO.getListItems(grocerylist.getId());
-//                listAdapter = new ItemListViewAdapter(NewList.this, groceryItems);
-//                lv_groceryList.setAdapter(listAdapter);
-//            }
-//
-//        });
-
     }
 
     public static void deleteItem(GroceryListItems item) {

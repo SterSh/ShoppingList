@@ -52,7 +52,6 @@ public class ItemListViewAdapter extends ArrayAdapter<GroceryListItems> {
                     }
                 }
             );
-        this.notifyDataSetChanged();
         return convertView;
     }
 }
