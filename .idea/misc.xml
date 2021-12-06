@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Dell E6520 i7/Documents/College Classes/CS 246/Android/Android Projects/FromStoreToCore/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Dell E6520 i7/Documents/College Classes/CS 246/Android/Android Projects/FromStoreToCore/app/src/main/res/layout/item_list_row.xml" value="0.20854700854700856" />
         <entry key="..\:/Users/Dell E6520 i7/Documents/College Classes/CS 246/Android/Android Projects/FromStoreToCore/app/src/main/res/layout/load_lists.xml" value="0.2" />
         <entry key="..\:/Users/Dell E6520 i7/Documents/College Classes/CS 246/Android/Android Projects/FromStoreToCore/app/src/main/res/layout/logo_launchscreen.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dell E6520 i7/Documents/College Classes/CS 246/Android/Android Projects/FromStoreToCore/app/src/main/res/layout/new_list.xml" value="0.264" />
@@ -12,12 +13,9 @@
         <entry key="..\:/Users/Sterling/AndroidStudioProjects/FromStoreToCore/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Sterling/AndroidStudioProjects/FromStoreToCore/app/src/main/res/layout/item_list_row.xml" value="0.2" />
         <entry key="..\:/Users/Sterling/AndroidStudioProjects/FromStoreToCore/app/src/main/res/layout/list_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Sterling/AndroidStudioProjects/FromStoreToCore/app/src/main/res/layout/lists_row.xml" value="0.1" />
         <entry key="..\:/Users/Sterling/AndroidStudioProjects/FromStoreToCore/app/src/main/res/layout/load_lists.xml" value="0.25" />
         <entry key="..\:/Users/Sterling/AndroidStudioProjects/FromStoreToCore/app/src/main/res/layout/logo_launchscreen.xml" value="0.33" />
         <entry key="..\:/Users/Sterling/AndroidStudioProjects/FromStoreToCore/app/src/main/res/layout/new_list.xml" value="0.33" />
-        <entry key="..\:/Users/Sterling/AndroidStudioProjects/grocerylistapp/app/src/main/res/layout/item_list_row.xml" value="0.1707193515704154" />
-        <entry key="..\:/Users/ultim/Desktop/FromStoreToCore/app/src/main/res/layout/item_input.xml" value="0.5" />
       </map>
     </option>
   </component>

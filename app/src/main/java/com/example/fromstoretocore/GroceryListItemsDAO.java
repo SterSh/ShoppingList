@@ -21,6 +21,7 @@ public class GroceryListItemsDAO {
     public static final String DATABASE_NAME = "GroceryList";
 
     private static Context context;
+    private static int boolean_column_index = 0;
 
 
     public GroceryListItemsDAO(Context context) {
@@ -32,6 +33,7 @@ public class GroceryListItemsDAO {
         ContentValues cv = new ContentValues();
         cv.put(FIELD_IDGROCERYLIST, groceryListItems.getIdGroceryList());
         cv.put(FIELD_PRODUCT, groceryListItems.getDescription());
+        cv.put(FIELD_CHECKED, groceryListItems.isChecked());
         // Add cv.put for the rest of the fields using getters for each variable
         try {
             db.insert(TABLE_NAME, null, cv);
@@ -46,6 +48,7 @@ public class GroceryListItemsDAO {
         ContentValues cv = new ContentValues();
         cv.put(FIELD_IDGROCERYLIST, groceryListItems.getIdGroceryList());
         cv.put(FIELD_PRODUCT, groceryListItems.getDescription());
+        cv.put(FIELD_CHECKED, groceryListItems.isChecked());
         // Add cv.put for the rest of the fields using getters for each variable
         try {
             db.insert(TABLE_NAME, null, cv);
@@ -55,10 +58,29 @@ public class GroceryListItemsDAO {
         }
     }
 
+    public static GroceryListItems select(Context context, int idItemShoppingList) throws Exception {
+        try {
+            SQLiteDatabase db = new DatabaseDAO(context).getReadableDatabase();
+
+            Cursor cursor = db.query(TABLE_NAME, new String[] { FIELD_ID, FIELD_IDGROCERYLIST, FIELD_PRODUCT, FIELD_CHECKED }, FIELD_ID + " = ?", new String[] { String.valueOf(idItemShoppingList) }, null, null, null);
+
+            if (cursor.moveToNext()) {
+
+                return returnClassInstance(context, cursor);
+            }
+
+            cursor.close();
+
+        } catch (Exception e) {
+            throw new Exception(e.getMessage(), e);
+        }
+        return null;
+    }
+
     private static GroceryListItems selectLast(Context context, SQLiteDatabase db) throws Exception {
         try {
             // Add the rest of the fields inside the { }
-            Cursor cursor = db.query(TABLE_NAME, new String[] { FIELD_ID, FIELD_IDGROCERYLIST, FIELD_PRODUCT }, null, null, null,null, FIELD_ID + " desc");
+            Cursor cursor = db.query(TABLE_NAME, new String[] { FIELD_ID, FIELD_IDGROCERYLIST, FIELD_PRODUCT, FIELD_CHECKED }, null, null, null,null, FIELD_ID + " desc");
             if (cursor.moveToNext()) {
                 return returnClassInstance(context, cursor);
             }
@@ -79,8 +101,9 @@ public class GroceryListItemsDAO {
             int id = res.getInt(0);
             int idShoppingList = res.getInt(1);
             String name = res.getString(2);
+            boolean checked = res.getInt(boolean_column_index) > 0;
 
-            GroceryListItems listItems = new GroceryListItems(id, idShoppingList, name);
+            GroceryListItems listItems = new GroceryListItems(id, idShoppingList, name, checked);
 
             groceryListItems.add(listItems);
         }
@@ -101,8 +124,21 @@ public class GroceryListItemsDAO {
 
     }
 
+    public static void update(Context context, GroceryListItems itemShoppingList) throws Exception {
+        SQLiteDatabase db = new DatabaseDAO(context).getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(FIELD_PRODUCT, itemShoppingList.getDescription());
+        cv.put(FIELD_CHECKED, String.valueOf(itemShoppingList.isChecked()));
+        try {
+            db.update(TABLE_NAME, cv, FIELD_ID + " = ?", new String[] { String.valueOf(itemShoppingList.getId()) });
+        } catch (Exception e) {
+            throw new Exception(e.getMessage(), e);
+        }
+    }
+
     @SuppressLint("Range")
     public static GroceryListItems returnClassInstance(Context context, Cursor cursor) {
-        return new GroceryListItems(cursor.getInt(cursor.getColumnIndex(FIELD_ID)), cursor.getInt(cursor.getColumnIndex(FIELD_IDGROCERYLIST)), cursor.getString(cursor.getColumnIndex(FIELD_PRODUCT)));
+        return new GroceryListItems(cursor.getInt(cursor.getColumnIndex(FIELD_ID)), cursor.getInt(cursor.getColumnIndex(FIELD_IDGROCERYLIST)), cursor.getString(cursor.getColumnIndex(FIELD_PRODUCT)), Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(FIELD_CHECKED))));
     }
 }

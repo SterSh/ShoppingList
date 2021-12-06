@@ -26,7 +26,7 @@ public class DatabaseDAO extends SQLiteOpenHelper {
         // Put in the rest of the Static Fields from GroceryListItemsDAO into GROCERYLISTITEMS TABLE as you initialize them into //
         // the code, will break program I put them in now. Must be in all caps like it is now.                                   //
         db.execSQL("CREATE TABLE GROCERYLIST(_id INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT);");
-        db.execSQL("CREATE TABLE GROCERYLISTITEMS(_id INTEGER PRIMARY KEY AUTOINCREMENT, IDGROCERYLIST INTEGER, DESCRIPTION TEXT);");
+        db.execSQL("CREATE TABLE GROCERYLISTITEMS(_id INTEGER PRIMARY KEY AUTOINCREMENT, IDGROCERYLIST INTEGER, DESCRIPTION TEXT, CHECKED VARCHAR(1));");
     }
 
     @Override
@@ -40,15 +40,15 @@ public class DatabaseDAO extends SQLiteOpenHelper {
 
             // Put in the rest of the Static Fields from GroceryListItemsDAO into GROCERYLISTITEMS TABLE as you initialize them into //
             // the code, will break program I put them in now. Must be in all caps like it is now.                                   //
-            db.execSQL("CREATE TABLE GROCERYLISTITEMS(_id INTEGER PRIMARY KEY AUTOINCREMENT, IDGROCERYLIST INTEGER, DESCRIPTION TEXT);");
-            db.execSQL("INSERT INTO GROCERYLISTITEMS(_id,IDSHOPPINGLIST,DESCRIPTION) SELECT ID,IDGROCERYLIST,DESCRIPTION FROM GROCERYLISTITEMS;");
+            db.execSQL("CREATE TABLE GROCERYLISTITEMS(_id INTEGER PRIMARY KEY AUTOINCREMENT, IDGROCERYLIST INTEGER, DESCRIPTION TEXT, CHECKED VARCHAR(1));");
+            db.execSQL("INSERT INTO GROCERYLISTITEMS(_id,IDSHOPPINGLIST,DESCRIPTION,CHECKED) SELECT ID,IDGROCERYLIST,DESCRIPTION, CHECKED FROM GROCERYLISTITEMS;");
             db.execSQL("DROP TABLE IF EXISTS GROCERYLISTITEMS;");
 
             // Put in the rest of the Static Fields from GroceryListItemsDAO into GROCERYLISTITEMS TABLE as you initialize them into //
             // the code, will break program I put them in now. Must be in all caps like it is now.                                   //
             onCreate(db);
             db.execSQL("INSERT INTO GROCERYLIST(_id,NAME) SELECT _id,NAME FROM GROCERYLISTX;");
-            db.execSQL("INSERT INTO GROCERYLISTITEMS(_id,IDSHOPPINGLIST,DESCRIPTION) SELECT _id,IDSHOPPINGLIST,DESCRIPTION FROM GROCERYLISTITEMSX;");
+            db.execSQL("INSERT INTO GROCERYLISTITEMS(_id,IDSHOPPINGLIST,DESCRIPTION, CHECKED) SELECT _id,IDSHOPPINGLIST,DESCRIPTION, CHECKED FROM GROCERYLISTITEMSX;");
             db.setTransactionSuccessful();
 
         } catch (Exception e) {

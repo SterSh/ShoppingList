@@ -1,37 +1,31 @@
 package com.example.fromstoretocore;
 
-import android.app.Activity;
-import android.content.Context;
+import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 
-public class NewList extends AppCompatActivity {
+public class NewList extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     private ArrayList<String> items = new ArrayList<>();
     private static ArrayList<GroceryListItems> groceryItems = new ArrayList<>();
     private static ListView lv_groceryList;
     private static GroceryList grocerylist;
 
+    Boolean isChecked = false;
     public static ItemListViewAdapter listAdapter;
     GroceryListItemsDAO groceryListItemsDAO = new GroceryListItemsDAO(this);
 
@@ -60,6 +54,22 @@ public class NewList extends AppCompatActivity {
         listAdapter = new ItemListViewAdapter(this, groceryItems);
         lv_groceryList.setAdapter(listAdapter);
 
+        lv_groceryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    GroceryListItems groceryListItems = (GroceryListItems) parent.getItemAtPosition(position);
+                    isChecked = !groceryListItems.isChecked();
+                    groceryListItems.setChecked(isChecked);
+                    GroceryListItemsDAO.update(NewList.this, groceryListItems);
+                    refreshListView();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(NewList.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
     }
 
     public static void deleteItem(GroceryListItems item) {
@@ -94,7 +104,7 @@ public class NewList extends AppCompatActivity {
             items.add(newItem);
 
             try {
-                GroceryListItemsDAO.insert(this, new GroceryListItems(0, grocerylist.getId(), newItem));
+                GroceryListItemsDAO.insert(this, new GroceryListItems(0, grocerylist.getId(), newItem, false));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -120,41 +130,9 @@ public class NewList extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
-    public void SaveList(View view) throws Exception {
-        /*
-        Filename = grocerylist.getName();
-        if (Filename.matches("")) {
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "No filename detected, Please name Grocery List", Toast.LENGTH_SHORT);
-            toast.show();
-        } else {
-
-            Gson gson = new Gson();
-
-
-            String inputString= gson.toJson(items);
-
-            System.out.println("inputString= " + inputString);
-
-            //database.insert(Filename, inputString);
-
-            FileOutputStream fos = null;
-            fos = openFileOutput(Filename, Context.MODE_PRIVATE);
-
-            ObjectOutputStream oos = null;
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(items);
-            oos.close();
-
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "Successfully saved List: " + Filename, Toast.LENGTH_SHORT);
-            toast.show();
-
-
-        }
-         */
     }
 
     // this event will enable the back
@@ -167,5 +145,12 @@ public class NewList extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void checked() {
+    }
+
+    private void refreshListView() {
+        listAdapter.notifyDataSetChanged();
     }
 }

@@ -57,10 +57,10 @@ public class GroceryListItems implements Serializable {
     }
 
     public GroceryListItems(Context context) {
-        this(0, 0, context.getString(R.string.no_description));
+        this(0, 0, context.getString(R.string.no_description), false);
     }
 
-    public GroceryListItems(int id, int idShoppingList, String description) {
+    public GroceryListItems(int id, int idShoppingList, String description, boolean b) {
         setId(id);
         setIdGroceryList(idShoppingList);
         setDescription(description);
