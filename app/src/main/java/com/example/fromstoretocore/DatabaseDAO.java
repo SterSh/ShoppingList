@@ -5,22 +5,25 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class DatabaseDAO extends SQLiteOpenHelper {
 
     public static final String TABLE_NAME = "GROCERYLIST";
-    public static final String ITEM_TABLE_NAME = "GROCERYLISTITEMS";
-
     public static final String DATABASE_NAME = "GroceryList";
     private Context context;
 
+    //UNUSED VARIABLE
+    public static final String ITEM_TABLE_NAME = "GROCERYLISTITEMS";
+
+
+    //Creates DatabaseDAO instance
     public DatabaseDAO(Context context) {
         super(context, DATABASE_NAME, null, 1);
         this.context = context;
     }
 
+    //Creates entry in SQLite database when instance of class is created
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Put in the rest of the Static Fields from GroceryListItemsDAO into GROCERYLISTITEMS TABLE as you initialize them into //
@@ -29,6 +32,7 @@ public class DatabaseDAO extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE GROCERYLISTITEMS(_id INTEGER PRIMARY KEY AUTOINCREMENT, IDGROCERYLIST INTEGER, DESCRIPTION TEXT, CHECKED VARCHAR(1));");
     }
 
+    //Upgrades DAO
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
@@ -58,6 +62,7 @@ public class DatabaseDAO extends SQLiteOpenHelper {
         }
     }
 
+    //Gets list names in GroceryList ArrayList
     // Sterling can do this for the rest of the items like he did for the names       //
     // May require another function like this one, for when we reload a previous list //
     public ArrayList<GroceryList> getListNames() {
@@ -75,6 +80,4 @@ public class DatabaseDAO extends SQLiteOpenHelper {
         return groceryLists;
     }
     //Method to get all the items for a given list.
-
-
 }

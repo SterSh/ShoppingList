@@ -1,7 +1,5 @@
 package com.example.fromstoretocore;
 
-import android.content.ClipData;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.MenuItem;
@@ -10,13 +8,11 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
-
 
 public class NewList extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
@@ -29,6 +25,7 @@ public class NewList extends AppCompatActivity implements AdapterView.OnItemClic
     public static ItemListViewAdapter listAdapter;
     GroceryListItemsDAO groceryListItemsDAO = new GroceryListItemsDAO(this);
 
+    //Runs when a new NewList object is created
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +52,8 @@ public class NewList extends AppCompatActivity implements AdapterView.OnItemClic
         lv_groceryList.setAdapter(listAdapter);
 
         lv_groceryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            //Enables items to be crossed off
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
@@ -72,15 +71,18 @@ public class NewList extends AppCompatActivity implements AdapterView.OnItemClic
         });
     }
 
+    //Allows user to delete item from list
     public static void deleteItem(GroceryListItems item) {
         GroceryListItemsDAO.deleteItem(item);
     }
 
+    //Updates items in list
     public void updateItems() {
         groceryItems = groceryListItemsDAO.getListItems(grocerylist.getId());
         lv_groceryList.setAdapter(listAdapter);
     }
 
+    //Allows user to add item to list
     public void AddItem(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("New Item");
@@ -129,13 +131,7 @@ public class NewList extends AppCompatActivity implements AdapterView.OnItemClic
 
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    // this event will enable the back
-    // function to the button on press
+    //Enables back button in upper left corner on NewLIst view
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -146,10 +142,18 @@ public class NewList extends AppCompatActivity implements AdapterView.OnItemClic
         return super.onOptionsItemSelected(item);
     }
 
-    public static void checked() {
+    //Creates click event
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 
+    //Refreshes the ListView
     private void refreshListView() {
         listAdapter.notifyDataSetChanged();
+    }
+
+    //UNUSED FUNCTION
+    public static void checked() {
     }
 }

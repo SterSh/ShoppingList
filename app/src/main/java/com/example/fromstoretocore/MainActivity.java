@@ -1,28 +1,19 @@
 package com.example.fromstoretocore;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     GroceryList groceryList;
 
+    //Runs when a new MainActivity object is created
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Runs when the New List button is tapped
     public void NewList(View view) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(getString(R.string.save));
@@ -40,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         alert.setView(edName);
 
         alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+
+            //Runs when button is tapped
             public void onClick(DialogInterface dialog, int whichButton) {
 
                 groceryList.setName(MainActivity.this, edName.getText().toString());
@@ -56,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
     }
 
+    //Loads a list
     public void LoadList(View view) throws Exception {
 
         Intent intent = new Intent(this, LoadList.class);
@@ -70,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //UNUSED FUNCTION
     public void OutputDisplay() {
     }
 }

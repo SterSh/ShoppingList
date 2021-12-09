@@ -1,6 +1,5 @@
 package com.example.fromstoretocore;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,19 +8,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 
 public class ListsListViewAdapter extends ArrayAdapter<GroceryList> {
 
+    //Creates ListsListViewAdapter instance
     public ListsListViewAdapter(Context context, ArrayList<GroceryList> items) {
         super(context, R.layout.lists_row, items);
 
     }
 
+    //Gets view
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -41,6 +40,7 @@ public class ListsListViewAdapter extends ArrayAdapter<GroceryList> {
             ImageView delete = convertView.findViewById(R.id.list_delete);
 
             delete.setOnClickListener(new View.OnClickListener() {
+                    //Deletes list when delete button is tapped, displays toast
                     @Override
                     public void onClick(View v) {
                         LoadList.deleteList(items);

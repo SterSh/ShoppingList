@@ -1,7 +1,5 @@
 package com.example.fromstoretocore;
 
-
-
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Paint;
@@ -13,20 +11,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cursoradapter.widget.CursorAdapter;
-
 import java.util.ArrayList;
 
 public class ItemListViewAdapter extends ArrayAdapter<GroceryListItems> {
 
+    //Creates ItemListViewAdapter instance
     public ItemListViewAdapter(Context context, ArrayList<GroceryListItems> items) {
         super(context, R.layout.item_list_row, items);
 
     }
 
+    //Gets view
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -45,10 +42,12 @@ public class ItemListViewAdapter extends ArrayAdapter<GroceryListItems> {
             itemName.setPaintFlags(items.isChecked() ? Paint.STRIKE_THRU_TEXT_FLAG : Paint.ANTI_ALIAS_FLAG);
             itemName.setTypeface(null, items.isChecked() ? Typeface.ITALIC : Typeface.NORMAL);
 
+            //VARIABLE IS NEVER USED
             ImageView note = convertView.findViewById(R.id.item_note);
             ImageView delete = convertView.findViewById(R.id.item_delete);
 
             delete.setOnClickListener(new View.OnClickListener() {
+                    //Deletes item when delete button is tapped, displays toast
                     @Override
                     public void onClick(View v) {
                         NewList.deleteItem(items);
@@ -62,6 +61,7 @@ public class ItemListViewAdapter extends ArrayAdapter<GroceryListItems> {
         return convertView;
     }
 
+    //UNUSED FUNCTION
     public void bindView(View view, Context context, Cursor cursor) {
 
     }

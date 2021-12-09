@@ -1,29 +1,15 @@
 package com.example.fromstoretocore;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CursorAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +20,13 @@ public class LoadList extends AppCompatActivity {
     GroceryList grocerylist;
     private ArrayAdapter listAdapter;
     ArrayList<GroceryList> groceryList;
+
+    //UNUSED VARIABLE
     GroceryListDAO groceryListDAO = new GroceryListDAO(this);
 
 
+
+    //Runs when a new LoadList object is created
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +52,7 @@ public class LoadList extends AppCompatActivity {
         saved_lists.setAdapter(listAdapter);
 
         saved_lists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            //Starts a new intent for a grocery list
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GroceryList clickedList = (GroceryList) parent.getItemAtPosition(position);
@@ -73,26 +64,29 @@ public class LoadList extends AppCompatActivity {
         });
     }
 
+    //Allows app to resume after going on standby
     protected void onResume() {
         refreshListView();
         super.onResume();
         saved_lists.setAdapter(listAdapter);
     }
 
+    //Refreshes the ListView
     private void refreshListView() {
         listAdapter.notifyDataSetChanged();
     }
 
+    //Allows user to delete an entire list
     public static void deleteList(GroceryList item) {
         GroceryListDAO.deleteList(item);
     }
 
+    //Allows user to delete items from a list
     public static void deleteListItems(GroceryList item) {
         GroceryListItemsDAO.deleteListItems(item);
     }
 
-    // this event will enable the back
-    // function to the button on press
+    //Enables back button in upper left corner on LoadLIst view
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

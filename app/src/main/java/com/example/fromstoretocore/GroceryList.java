@@ -1,16 +1,14 @@
 package com.example.fromstoretocore;
 
 import android.content.Context;
-
 import androidx.annotation.NonNull;
-
-import java.util.Date;
 
 public class GroceryList {
 
     private int id;
     private String name;
 
+    //Getter and setter for Id variable
     public int getId() {
         return id;
     }
@@ -19,6 +17,7 @@ public class GroceryList {
         this.id = id;
     }
 
+    //Getter and setter for Name variable
     public String getName() {
         return name;
     }
@@ -27,22 +26,10 @@ public class GroceryList {
         this.name = (name.isEmpty() ? null : name);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public GroceryList(Context context) {
-
-    }
-
+    //Creates GroceryList objects containing Id and Name variables
     public GroceryList(Context context, int id, String name) {
         setId(id);
         setName(context, name);
-    }
-
-    public GroceryList( int id, String name) {
-        setId(id);
-        setName(name);
     }
 
     //This is what the Array adapter is using to
@@ -51,5 +38,21 @@ public class GroceryList {
     @Override
     public String toString() {
         return "" + getName();
+    }
+
+    //POSSIBLE DUPLICATE FUNCTION
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    //POSSIBLE DUPLICATE FUNCTION
+    public GroceryList( int id, String name) {
+        setId(id);
+        setName(name);
+    }
+
+    //POSSIBLE DUPLICATE FUNCTION
+    public GroceryList(Context context) {
+
     }
 }
