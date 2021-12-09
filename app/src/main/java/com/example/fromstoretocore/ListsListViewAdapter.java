@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,9 +43,12 @@ public class ListsListViewAdapter extends ArrayAdapter<GroceryList> {
             delete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //NewList.deleteItem(items);
-                        //remove(items);
-                        //notifyDataSetChanged();
+                        LoadList.deleteList(items);
+                        LoadList.deleteListItems(items);
+                        remove(items);
+                        notifyDataSetChanged();
+                        Toast toast = Toast.makeText(getContext(), "List Deleted: " + items.getName(), Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 }
             );

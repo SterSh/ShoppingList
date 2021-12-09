@@ -27,14 +27,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoadList extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, DialogInterface.OnDismissListener {
+public class LoadList extends AppCompatActivity {
     // Initialize Private Variables
     private ListView saved_lists;
     private List<String> items = new ArrayList<>();
     GroceryList grocerylist;
     private ArrayAdapter listAdapter;
     ArrayList<GroceryList> groceryList;
-    ArrayList<GroceryListItems> groceryItems;
+    GroceryListDAO groceryListDAO = new GroceryListDAO(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,28 +76,19 @@ public class LoadList extends AppCompatActivity implements AdapterView.OnItemCli
     protected void onResume() {
         refreshListView();
         super.onResume();
-
         saved_lists.setAdapter(listAdapter);
-
     }
 
     private void refreshListView() {
         listAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-
+    public static void deleteList(GroceryList item) {
+        GroceryListDAO.deleteList(item);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        return false;
+    public static void deleteListItems(GroceryList item) {
+        GroceryListItemsDAO.deleteListItems(item);
     }
 
     // this event will enable the back

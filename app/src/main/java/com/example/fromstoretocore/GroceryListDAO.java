@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -12,7 +13,11 @@ public class GroceryListDAO {
     public static final String TABLE_NAME = "GROCERYLIST";
     public static final String FIELD_ID = "_id";
     public static final String FIELD_NAME = "NAME";
+    private static Context context;
 
+    public GroceryListDAO(Context context) {
+        this.context = context;
+    }
 
     public static GroceryList select(Context context, int idShoppingList) throws IOException {
         SQLiteDatabase db = new DatabaseDAO(context).getReadableDatabase();
@@ -31,6 +36,17 @@ public class GroceryListDAO {
         return null;
     }
 
+    public static boolean deleteList(GroceryList list) {
+        SQLiteDatabase db = new DatabaseDAO(context).getWritableDatabase();
+        String queryString = "DELETE FROM " + TABLE_NAME + " WHERE " + FIELD_ID + " = " + list.getId();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public static Cursor selectAll(Context context) throws Exception {
         try {

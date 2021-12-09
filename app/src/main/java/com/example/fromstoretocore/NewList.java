@@ -74,7 +74,6 @@ public class NewList extends AppCompatActivity implements AdapterView.OnItemClic
 
     public static void deleteItem(GroceryListItems item) {
         GroceryListItemsDAO.deleteItem(item);
-
     }
 
     public void updateItems() {

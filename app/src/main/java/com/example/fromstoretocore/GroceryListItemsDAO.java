@@ -121,7 +121,18 @@ public class GroceryListItemsDAO {
         } else {
             return false;
         }
+    }
 
+    public static boolean deleteListItems(GroceryList list) {
+        SQLiteDatabase db = new DatabaseDAO(context).getWritableDatabase();
+        String queryString = "DELETE FROM " + TABLE_NAME + " WHERE " + FIELD_IDGROCERYLIST + " = " + list.getId();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static void update(Context context, GroceryListItems itemShoppingList) throws Exception {
