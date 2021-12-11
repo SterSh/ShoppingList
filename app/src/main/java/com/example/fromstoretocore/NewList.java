@@ -14,7 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
-public class NewList extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class NewList extends AppCompatActivity {
 
     private ArrayList<String> items = new ArrayList<>();
     private static ArrayList<GroceryListItems> groceryItems = new ArrayList<>();
@@ -131,11 +131,6 @@ public class NewList extends AppCompatActivity implements AdapterView.OnItemClic
         return super.onOptionsItemSelected(item);
     }
 
-    //Creates click event
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    }
 
     //Refreshes the ListView
     private void refreshListView() {
