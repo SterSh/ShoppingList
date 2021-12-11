@@ -42,8 +42,6 @@ public class ItemListViewAdapter extends ArrayAdapter<GroceryListItems> {
             itemName.setPaintFlags(items.isChecked() ? Paint.STRIKE_THRU_TEXT_FLAG : Paint.ANTI_ALIAS_FLAG);
             itemName.setTypeface(null, items.isChecked() ? Typeface.ITALIC : Typeface.NORMAL);
 
-            //VARIABLE IS NEVER USED
-            ImageView note = convertView.findViewById(R.id.item_note);
             ImageView delete = convertView.findViewById(R.id.item_delete);
 
             delete.setOnClickListener(new View.OnClickListener() {
@@ -61,8 +59,4 @@ public class ItemListViewAdapter extends ArrayAdapter<GroceryListItems> {
         return convertView;
     }
 
-    //UNUSED FUNCTION
-    public void bindView(View view, Context context, Cursor cursor) {
-
-    }
 }

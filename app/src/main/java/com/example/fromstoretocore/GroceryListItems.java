@@ -8,9 +8,6 @@ public class GroceryListItems implements Serializable {
     private int id;
     private int idShoppingList;
     private String description;
-    private float quantity;
-    private float totalPrice;
-    private float itemPrice;
     private boolean checked;
 
     //Function to check if the item is crossed off or not
@@ -61,23 +58,6 @@ public class GroceryListItems implements Serializable {
     public String toString() {
         return "" + description;
     }
-
-    //UNUSED FUNCTIONS
-
-    //Getter and setter for Quantity variable
-    public float getQuantity() { return quantity; }
-
-    public void setQuantity(float quantity) { this.quantity = quantity; }
-
-    //Getter and setter for TotalPrice variable
-    public float getTotalPrice() { return totalPrice; }
-
-    public void setTotalPrice(float totalPrice) { this.totalPrice = totalPrice; }
-
-    //Getter and setter for ItemPrice variable
-    public float getItemPrice() { return itemPrice; }
-
-    public void setItemPrice(float itemPrice) { this.itemPrice = itemPrice; }
 
     public GroceryListItems(Context context) {
         this(0, 0, context.getString(R.string.no_description), false);

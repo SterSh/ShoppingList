@@ -15,12 +15,6 @@ public class GroceryListItemsDAO {
     public static final String FIELD_PRODUCT = "DESCRIPTION";
     public static final String FIELD_CHECKED = "CHECKED";
 
-    //UNUSED VARIABLES
-    public static final String FIELD_QUANTITY = "QUANTITY";
-    public static final String FIELD_ITEMPRICE = "ITEMPRICE";
-    public static final String FIELD_TOTALPRICE = "TOTALPRICE";
-    public static final String DATABASE_NAME = "GroceryList";
-
     private static Context context;
     private static int boolean_column_index = 0;
 

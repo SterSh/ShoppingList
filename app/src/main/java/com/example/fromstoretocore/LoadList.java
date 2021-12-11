@@ -21,7 +21,6 @@ public class LoadList extends AppCompatActivity {
     private ArrayAdapter listAdapter;
     ArrayList<GroceryList> groceryList;
 
-    //UNUSED VARIABLE
     GroceryListDAO groceryListDAO = new GroceryListDAO(this);
 
 

@@ -89,17 +89,6 @@ public class NewList extends AppCompatActivity implements AdapterView.OnItemClic
         EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
-//      THIS IS TO ADD MULTIPLE FIELDS TO THE ALERT DIALOG
-/*        builder.setView(R.layout.item_input);
-
-        inputName.setInputType(InputType.TYPE_CLASS_TEXT);
-
-        final EditText inputAmount = new EditText(this);
-        inputName.setInputType(InputType.TYPE_CLASS_TEXT);
-
-        final EditText inputPrice = new EditText(this);
-        inputPrice.setInputType(InputType.TYPE_CLASS_TEXT);
-*/
         builder.setPositiveButton("OK", (dialog, which) -> {
             String newItem = input.getText().toString();
             items.add(newItem);
@@ -153,7 +142,4 @@ public class NewList extends AppCompatActivity implements AdapterView.OnItemClic
         listAdapter.notifyDataSetChanged();
     }
 
-    //UNUSED FUNCTION
-    public static void checked() {
-    }
 }

@@ -56,17 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, LoadList.class);
         startActivity(intent);
-        if (groceryList.getName() == null) {
-            Toast toast = Toast.makeText(getApplicationContext(), "No Saved Lists Found", Toast.LENGTH_SHORT);
-            toast.show();
-        } else {
-            //Intent intent = new Intent(this, LoadList.class);
-            //startActivity(intent);
-        }
 
     }
 
-    //UNUSED FUNCTION
-    public void OutputDisplay() {
-    }
 }

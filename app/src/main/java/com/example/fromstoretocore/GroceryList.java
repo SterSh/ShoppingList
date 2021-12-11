@@ -40,18 +40,15 @@ public class GroceryList {
         return "" + getName();
     }
 
-    //POSSIBLE DUPLICATE FUNCTION
     public void setName(String name) {
         this.name = name;
     }
 
-    //POSSIBLE DUPLICATE FUNCTION
     public GroceryList( int id, String name) {
         setId(id);
         setName(name);
     }
 
-    //POSSIBLE DUPLICATE FUNCTION
     public GroceryList(Context context) {
 
     }
