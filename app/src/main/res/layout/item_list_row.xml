@@ -26,15 +26,6 @@
         />
 
     <ImageView
-        android:id="@+id/item_note"
-        android:layout_width="22sp"
-        android:layout_height="22sp"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="18sp"
-        android:layout_toLeftOf="@+id/item_delete"
-        android:src="@drawable/item_list_row_note" />
-
-    <ImageView
         android:layout_width="22sp"
         android:layout_height="22sp"
         android:id="@+id/item_delete"

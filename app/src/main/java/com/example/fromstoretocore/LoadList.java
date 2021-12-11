@@ -21,11 +21,6 @@ public class LoadList extends AppCompatActivity {
     private ArrayAdapter listAdapter;
     ArrayList<GroceryList> groceryList;
 
-    //UNUSED VARIABLE
-    GroceryListDAO groceryListDAO = new GroceryListDAO(this);
-
-
-
     //Runs when a new LoadList object is created
     @Override
     protected void onCreate(Bundle savedInstanceState) {

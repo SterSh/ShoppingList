@@ -14,7 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
-public class NewList extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class NewList extends AppCompatActivity{
 
     private ArrayList<String> items = new ArrayList<>();
     private static ArrayList<GroceryListItems> groceryItems = new ArrayList<>();
@@ -89,17 +89,7 @@ public class NewList extends AppCompatActivity implements AdapterView.OnItemClic
         EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
-//      THIS IS TO ADD MULTIPLE FIELDS TO THE ALERT DIALOG
-/*        builder.setView(R.layout.item_input);
 
-        inputName.setInputType(InputType.TYPE_CLASS_TEXT);
-
-        final EditText inputAmount = new EditText(this);
-        inputName.setInputType(InputType.TYPE_CLASS_TEXT);
-
-        final EditText inputPrice = new EditText(this);
-        inputPrice.setInputType(InputType.TYPE_CLASS_TEXT);
-*/
         builder.setPositiveButton("OK", (dialog, which) -> {
             String newItem = input.getText().toString();
             items.add(newItem);
@@ -142,18 +132,8 @@ public class NewList extends AppCompatActivity implements AdapterView.OnItemClic
         return super.onOptionsItemSelected(item);
     }
 
-    //Creates click event
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
     //Refreshes the ListView
     private void refreshListView() {
         listAdapter.notifyDataSetChanged();
-    }
-
-    //UNUSED FUNCTION
-    public static void checked() {
     }
 }

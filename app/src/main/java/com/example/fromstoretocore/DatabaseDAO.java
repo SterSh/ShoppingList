@@ -26,8 +26,6 @@ public class DatabaseDAO extends SQLiteOpenHelper {
     //Creates entry in SQLite database when instance of class is created
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Put in the rest of the Static Fields from GroceryListItemsDAO into GROCERYLISTITEMS TABLE as you initialize them into //
-        // the code, will break program I put them in now. Must be in all caps like it is now.                                   //
         db.execSQL("CREATE TABLE GROCERYLIST(_id INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT);");
         db.execSQL("CREATE TABLE GROCERYLISTITEMS(_id INTEGER PRIMARY KEY AUTOINCREMENT, IDGROCERYLIST INTEGER, DESCRIPTION TEXT, CHECKED VARCHAR(1));");
     }
@@ -63,8 +61,6 @@ public class DatabaseDAO extends SQLiteOpenHelper {
     }
 
     //Gets list names in GroceryList ArrayList
-    // Sterling can do this for the rest of the items like he did for the names       //
-    // May require another function like this one, for when we reload a previous list //
     public ArrayList<GroceryList> getListNames() {
         ArrayList<GroceryList> groceryLists = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
@@ -79,5 +75,4 @@ public class DatabaseDAO extends SQLiteOpenHelper {
         }
         return groceryLists;
     }
-    //Method to get all the items for a given list.
 }
